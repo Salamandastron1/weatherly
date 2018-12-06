@@ -4,7 +4,7 @@ import Weather from './Weather';
 import TenDay from './TenDay';
 import KEY from './KEY';
 import Welcome from './Welcome';
-import Trie from '@markp619/complete-me/lib';
+import Trie from './@markp619/complete-me/lib';
 import data from './largest1000cities';
 let trie = new Trie();
 
@@ -36,6 +36,7 @@ export default class App extends Component {
   
   apiFetch = city => {
     fetch(`https://cors-anywhere.herokuapp.com/http://api.wunderground.com/api/${KEY}/conditions/hourly/forecast10day/q/${ city || 'autoip'}.json`)
+
       .then(response => response.json())
       .then(json => {
         console.log(json)
@@ -52,7 +53,6 @@ export default class App extends Component {
   handleSearchChange = e => {
     this.apiFetch(this.state.input);
   }
-
   componentDidMount() {
     let city =  localStorage.getItem('input') || this.state.input; 
     fetch(`http://api.wunderground.com/api/${KEY}/conditions/hourly/forecast10day/q/${ city || 'autoip'}.json`)
